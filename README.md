@@ -1,13 +1,21 @@
 Sledenje objektom
 =================
+OpenCV is installed through an extra, so pick exactly one: `gui` (needed for `--setup` and the debug window)
+or `headless` (servers and containers). Without an extra, OpenCV is not installed.
+
 Install from git:
 ```shell
-pip install git+https://github.com/RoboLiga/sledenje-objektom-2
+pip install "sledenje-objektom-2[gui] @ git+https://github.com/RoboLiga/sledenje-objektom-2"
 ```
 
 Install locally:
 ```
-pip install -e <path-to-folder>
+pip install -e "<path-to-folder>[gui]"
+```
+
+When developing with uv, `uv sync` installs the GUI build. To switch to the headless build:
+```shell
+uv sync --no-default-groups --group headless
 ```
 
 ### CLI reference

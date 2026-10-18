@@ -83,9 +83,8 @@ class TrackerGame(Tracker):
                 queue.put(copy.deepcopy(self.data))
             # print(self.data.to_json())
 
-            self.on_key_press()
-
             if self.debug:
+                self.on_key_press()
                 # Draw GUI and game_objects
                 frame = cv2.cvtColor(frame, cv2.COLOR_GRAY2BGR)
                 frame_markers = aruco.drawDetectedMarkers(frame.copy(), corners_tracked, ids)
@@ -94,7 +93,8 @@ class TrackerGame(Tracker):
 
         # When everything done, release the capture
         cap.stop()
-        cv2.destroyAllWindows()
+        if self.debug:
+            cv2.destroyAllWindows()
         if queue is not None:
             queue.cancel_join_thread()
         sys.exit(0)
