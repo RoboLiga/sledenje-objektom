@@ -15,11 +15,24 @@ maintainers = [
     { name = "Žiga Slatnar Štagar", email = "contact@privatech.dev" }
 ]
 license = { text = "unlicense" }
+
 dependencies = [
-    "opencv-contrib-python==4.14.0.94",
     "numpy==2.5.3",
-    "shapely==2.1.2"
+    "shapely==2.1.2",
+    "pyyaml==6.0.3",
 ]
+
+# Exactly one OpenCV build must be installed, pick it with an extra
+[project.optional-dependencies]
+# OpenCV with GUI support, needed for --setup and the debug preview window
+gui = ["opencv-contrib-python==4.14.0.94"]
+# OpenCV without GUI support, for servers and containers
+headless = ["opencv-contrib-python-headless==4.14.0.94"]
+
+# Groups used when developing this repo, so `uv sync` installs the GUI build by default
+[dependency-groups]
+gui = ["sledenje-objektom-2[gui]"]
+headless = ["sledenje-objektom-2[headless]"]
 
 [project.urls]
 Repository = "https://github.com/RoboLiga/sledenje-objektom-2"
@@ -28,3 +41,10 @@ Repository = "https://github.com/RoboLiga/sledenje-objektom-2"
 zip-safe = false
 
 [tool.setuptools.packages.find]
+
+[tool.uv]
+default-groups = ["gui"]
+conflicts = [
+    [{ extra = "gui" }, { extra = "headless" }],
+    [{ group = "gui" }, { group = "headless" }],
+]
