@@ -12,6 +12,9 @@ class VideoStreamer:
         self.timestamp = None
         self.video = None
         self.running = False
+        self._new_frame = threading.Condition()
+        self._frame_id = 0
+        self._last_read_id = 0
         return
 
     def __del__(self):
@@ -30,6 +33,7 @@ class VideoStreamer:
         if not self.ret:
             self.video.release()
             raise IOError("Couldn't open video frame.")
+        self._frame_id = 1
         self.running = True
 
         # Start the thread to read frames from the video stream
@@ -42,21 +46,39 @@ class VideoStreamer:
         try:
             # Keep looping infinitely until the stream is closed
             while self.running:
-                self.timestamp = time.time()
-                #  Read the next frame from the stream
-                self.ret, self.frame = self.video.read()
+                #  Read the next frame from the stream (blocks until the camera delivers)
+                ret, frame = self.video.read()
+                with self._new_frame:
+                    self.ret, self.frame = ret, frame
+                    self.timestamp = time.time()
+                    self._frame_id += 1
+                    self._new_frame.notify_all()
         except:
             import traceback
             traceback.print_exc()
-            self.running = False
         finally:
             # If the thread indicator variable is set, stop the thread
+            self.running = False
+            # Wake any waiter so it can exit
+            with self._new_frame:
+                self._new_frame.notify_all()
             self.video.release()
         return
 
+    def wait_for_frame(self, timeout=None):
+        # Block until there is an unread frame. Returns False on timeout or stop
+        with self._new_frame:
+            self._new_frame.wait_for(
+                lambda: self._frame_id != self._last_read_id or not self.running,
+                timeout,
+            )
+            return self._frame_id != self._last_read_id
+
     def read(self):
         # Return the frame most recently read
-        return self.frame, self.timestamp
+        with self._new_frame:
+            self._last_read_id = self._frame_id
+            return self.frame, self.timestamp
 
     def stop(self):
         self.running = False
