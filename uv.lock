@@ -2,11 +2,11 @@ version = 1
 revision = 3
 requires-python = ">=3.12"
 conflicts = [[
-    { package = "sledenje-objektom-2", extra = "gui" },
-    { package = "sledenje-objektom-2", extra = "headless" },
+    { package = "sledenje-objektom", extra = "gui" },
+    { package = "sledenje-objektom", extra = "headless" },
 ], [
-    { package = "sledenje-objektom-2", group = "gui" },
-    { package = "sledenje-objektom-2", group = "headless" },
+    { package = "sledenje-objektom", group = "gui" },
+    { package = "sledenje-objektom", group = "headless" },
 ]]
 
 [[package]]
@@ -87,7 +87,7 @@ name = "opencv-contrib-python"
 version = "4.14.0.94"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy", marker = "extra == 'extra-19-sledenje-objektom-2-gui' or (extra == 'group-19-sledenje-objektom-2-gui' and extra == 'group-19-sledenje-objektom-2-headless')" },
+    { name = "numpy", marker = "extra == 'extra-17-sledenje-objektom-gui' or (extra == 'group-17-sledenje-objektom-gui' and extra == 'group-17-sledenje-objektom-headless')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/eb/59/bc43b7d900de515f614fac9de8088be420a4d96fb019c9d49b53f637606e/opencv_contrib_python-4.14.0.94.tar.gz", hash = "sha256:f2e58020b9f54d68b49553a161327ae1bbc47da68e147231d444c915ee4cab4c", size = 151859592, upload-time = "2026-07-28T19:21:29.204Z" }
 wheels = [
@@ -106,7 +106,7 @@ name = "opencv-contrib-python-headless"
 version = "4.14.0.94"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
-    { name = "numpy", marker = "extra == 'extra-19-sledenje-objektom-2-headless' or (extra == 'group-19-sledenje-objektom-2-gui' and extra == 'group-19-sledenje-objektom-2-headless')" },
+    { name = "numpy", marker = "extra == 'extra-17-sledenje-objektom-headless' or (extra == 'group-17-sledenje-objektom-gui' and extra == 'group-17-sledenje-objektom-headless')" },
 ]
 sdist = { url = "https://files.pythonhosted.org/packages/47/36/cc620b8809235d50f3713b1b592fcd2f117e41322a10fb37e6d332b8e7b8/opencv_contrib_python_headless-4.14.0.94.tar.gz", hash = "sha256:6cd98a20010c80bf9e6a9cff6189dd2c10bd111fb0aa4d5c6361389514a0ff6c", size = 151872798, upload-time = "2026-07-28T19:22:29.226Z" }
 wheels = [
@@ -218,7 +218,7 @@ wheels = [
 ]
 
 [[package]]
-name = "sledenje-objektom-2"
+name = "sledenje-objektom"
 version = "1.1.0"
 source = { editable = "." }
 dependencies = [
@@ -237,12 +237,12 @@ headless = [
 
 [package.dev-dependencies]
 gui = [
-    { name = "sledenje-objektom-2", marker = "(extra == 'extra-19-sledenje-objektom-2-gui' and extra == 'extra-19-sledenje-objektom-2-headless') or (extra != 'extra-19-sledenje-objektom-2-headless' and extra == 'group-19-sledenje-objektom-2-gui') or (extra != 'extra-19-sledenje-objektom-2-gui' and extra == 'group-19-sledenje-objektom-2-gui')" },
-    { name = "sledenje-objektom-2", extra = ["gui"], marker = "(extra == 'extra-19-sledenje-objektom-2-gui' and extra == 'extra-19-sledenje-objektom-2-headless') or (extra == 'extra-19-sledenje-objektom-2-gui' and extra == 'group-19-sledenje-objektom-2-gui') or (extra == 'group-19-sledenje-objektom-2-gui' and extra == 'group-19-sledenje-objektom-2-headless')" },
+    { name = "sledenje-objektom", marker = "(extra == 'extra-17-sledenje-objektom-gui' and extra == 'extra-17-sledenje-objektom-headless') or (extra != 'extra-17-sledenje-objektom-headless' and extra == 'group-17-sledenje-objektom-gui') or (extra != 'extra-17-sledenje-objektom-gui' and extra == 'group-17-sledenje-objektom-gui')" },
+    { name = "sledenje-objektom", extra = ["gui"], marker = "(extra == 'extra-17-sledenje-objektom-gui' and extra == 'extra-17-sledenje-objektom-headless') or (extra == 'extra-17-sledenje-objektom-gui' and extra == 'group-17-sledenje-objektom-gui') or (extra == 'group-17-sledenje-objektom-gui' and extra == 'group-17-sledenje-objektom-headless')" },
 ]
 headless = [
-    { name = "sledenje-objektom-2", marker = "(extra == 'extra-19-sledenje-objektom-2-gui' and extra == 'extra-19-sledenje-objektom-2-headless') or (extra != 'extra-19-sledenje-objektom-2-headless' and extra == 'group-19-sledenje-objektom-2-headless') or (extra != 'extra-19-sledenje-objektom-2-gui' and extra == 'group-19-sledenje-objektom-2-headless')" },
-    { name = "sledenje-objektom-2", extra = ["headless"], marker = "(extra == 'extra-19-sledenje-objektom-2-gui' and extra == 'extra-19-sledenje-objektom-2-headless') or (extra == 'extra-19-sledenje-objektom-2-headless' and extra == 'group-19-sledenje-objektom-2-headless') or (extra == 'group-19-sledenje-objektom-2-gui' and extra == 'group-19-sledenje-objektom-2-headless')" },
+    { name = "sledenje-objektom", marker = "(extra == 'extra-17-sledenje-objektom-gui' and extra == 'extra-17-sledenje-objektom-headless') or (extra != 'extra-17-sledenje-objektom-headless' and extra == 'group-17-sledenje-objektom-headless') or (extra != 'extra-17-sledenje-objektom-gui' and extra == 'group-17-sledenje-objektom-headless')" },
+    { name = "sledenje-objektom", extra = ["headless"], marker = "(extra == 'extra-17-sledenje-objektom-gui' and extra == 'extra-17-sledenje-objektom-headless') or (extra == 'extra-17-sledenje-objektom-headless' and extra == 'group-17-sledenje-objektom-headless') or (extra == 'group-17-sledenje-objektom-gui' and extra == 'group-17-sledenje-objektom-headless')" },
 ]
 
 [package.metadata]
@@ -256,5 +256,5 @@ requires-dist = [
 provides-extras = ["gui", "headless"]
 
 [package.metadata.requires-dev]
-gui = [{ name = "sledenje-objektom-2", extras = ["gui"] }]
-headless = [{ name = "sledenje-objektom-2", extras = ["headless"] }]
+gui = [{ name = "sledenje-objektom", extras = ["gui"] }]
+headless = [{ name = "sledenje-objektom", extras = ["headless"] }]
