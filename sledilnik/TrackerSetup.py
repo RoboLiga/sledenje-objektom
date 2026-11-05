@@ -55,6 +55,11 @@ class TrackerSetup(Tracker):
         ts = timer()
         while not self.should_quit and cap.running:
 
+            # Wait for a new frame, keeping the window responsive if the camera stalls
+            if not cap.wait_for_frame(timeout=0.1):
+                self.on_key_press()
+                continue
+
             # Load frame-by-frame
             frame, timestamp = cap.read()
             if frame is None:
