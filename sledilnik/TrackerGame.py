@@ -115,12 +115,16 @@ class TrackerGame(Tracker):
                 self.data.objects[object_id].enabled = True
                 self.data.objects[object_id].last_seen = self.frame_counter
             else:
-                self.data.objects[object_id] = ObjectTracker(
+                new_object = ObjectTracker(
                     object_id,
                     position,
                     (0, 0, 0, 0),
                     self.tracker_config['kalman_filter']
                 )
+                # Seen in this frame. Left at 0, the timeout check below would delete every object
+                # that first appears after the first `object_timeout` frames, so it would never be tracked.
+                new_object.last_seen = self.frame_counter
+                self.data.objects[object_id] = new_object
 
         # Disable object tracking if not detected for a long time
         for k, v in list(self.data.objects.items()):
