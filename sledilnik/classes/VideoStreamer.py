@@ -23,13 +23,14 @@ class VideoStreamer:
         return
 
     def start(self, src):
-        self.timestamp = time.time()
         # Initialize the video camera stream and read the first frame
         self.video = cv2.VideoCapture(src)
         if not self.video.isOpened():
             # Camera failed
             raise IOError("Couldn't open video file or webcam.")
         self.ret, self.frame = self.video.read()
+        # Stamped once the frame is read, as in update()
+        self.timestamp = time.time()
         if not self.ret:
             self.video.release()
             raise IOError("Couldn't open video frame.")
